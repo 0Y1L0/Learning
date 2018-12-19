@@ -1,0 +1,180 @@
+<!-- 父组件获取子组件的值
+    1.在父组件定义一个带参数的方法  sonmsg1
+    2.在子组件的dom中绑定父组件的方法  @sonmsg2="sonmsg1"
+    3.在子组件中定义一个触发所绑定方法的方法，并传参  this.$emit('sonmsg2',this.son)
+    4.事件触发，父组件便拿到子组件的方法 -->
+<template>   
+    <div class="calc-main">
+        <div class=calc-main-item>
+            <h6>{{type?'运动量计算':'摄入量计算'}}</h6>
+            <div class="calc-item-data">
+                <div class="calc-data-num">
+                    <p>{{type?'运动总时长':'摄入量总量'}}</p>
+                    <p>{{type?allTime:allFood}}</p>
+                </div>
+                <div class="calc-data-num">
+                    <p>{{type?'运动消耗热量':'摄入增加热量'}}</p>
+                    <p>{{type?allKcal:allFoodKacl}}</p>
+                </div>
+                <div class="calc-data-num">
+                    <p>{{type?'整体消耗热量':'整体摄入热量'}}</p>
+                    <p>{{allKcal+1700}}</p>
+                </div>
+            </div>
+            <div class="calc-input-content" v-for="(itemf,index) in nowAdd" v-if='type'>
+                <select v-model='itemf.type'>
+                   <option v-for='item in sportList' :value="item.type">{{item.type}}</option>
+                </select>
+                <input type="" name="" v-model='itemf.time' placeholder="0"/>
+                <button @click='deletesport(index)'>删除</button>
+                <p>消耗了：{{calcKcal(itemf)}}</p>
+            </div>
+            <div class="calc-input-content" v-for="(itemf,index) in nowfood" v-if='!type'>
+                <select v-model='itemf.type'>
+                   <option v-for='item in foodList' :value="item.type">{{item.type}}</option>
+                </select>
+                <input type="" name="" v-model='itemf.time' placeholder="0"/>
+                <button @click='deletesport(index)'>删除</button>
+                <p>消耗了：{{calcKcal(itemf)}}</p>
+            </div>
+            <div class="calc-input-adder" @click='addsport'>添加运动项目</div>
+        </div>
+        <button @click='handle'>计算</button>
+    </div>
+</template>
+<script>
+export default{
+    name:'calcer',
+    props:['type'],
+    data:function(){
+        return {
+            sportList:[
+                {type:"慢跑",kcal:10.9},
+                {type:"快跑",kcal:12},
+                {type:"跳绳",kcal:7.4},
+                {type:"有氧操",kcal:10.1},
+                {type:"游泳",kcal:9},
+                {type:"跳舞(快)",kcal:6.4},
+                {type:"跳舞(慢)",kcal:4.8},
+                {type:"散步",kcal:3.8},
+                {type:"无氧训练",kcal:7.2}
+            ],
+            foodList:[
+                {type:"鸡胸肉沙拉",kcal:1296},      
+                {type:"果蔬沙拉",kcal:765.5}, 
+                {type:"龙利鱼沙拉",kcal:1194.4},
+                {type:"水果酸奶沙拉",kcal:824.2},
+                {type:"健身小盒",kcal:1924.6},
+                {type:"减脂小盒",kcal:1230.4},       
+                {type:"玉米紫薯",kcal:236},
+                {type:"粗粮抓饭",kcal:210},
+                {type:"香辣烤鸡胸",kcal:628},
+                {type:"烤龙利鱼",kcal:523},
+                {type:"麻辣鸡丝",kcal:729},
+            ],         
+            nowAdd:[{type:'慢跑',time:""}],
+            nowfood:[{type:'鸡胸肉沙拉',time:""}],
+        }
+    },
+    watch:{},
+    computed:{
+        allKcal:function(){
+            var _allKcal=0;
+            for(var i=0;i<this.nowAdd.length;i++){
+                _allKcal+=this.calcKcal(this.nowAdd[i]);
+            }
+            this.$store.state.allKcal=_allKcal;
+            return _allKcal;
+        },
+        allTime:function(){
+            var _alltime=0;
+            for(var i=0;i<this.nowAdd.length;i++){
+                _alltime+=this.nowAdd[i].time-0;
+            }
+            this.$store.state.allTime=_alltime;
+            return _alltime;
+        },
+        allFoodKacl:function(){
+            var _allFoodKacl=0;
+            for(var i=0;i<this.nowfood.length;i++){
+                _allFoodKacl+=this.calcKcal(this.nowfood[i]);
+            }
+            this.$store.state.allFoodKcal=_allFoodKacl;
+            return _allFoodKacl;
+        },
+        allFood:function(){
+            var _allfood=0;
+            for(var i=0;i<this.nowfood.length;i++){
+                _allfood+=this.nowfood[i].time-0;
+            }
+            this.$store.state.allFood=_allfood;
+
+            return _allfood;
+        }
+    },
+    methods:{
+        handle:function(){
+            if(this.type){
+                this.$emit('fhandle',this.allTime,this.allKcal,this.type)
+            }else{
+                this.$emit('fhandle',this.allFood,this.allFoodKacl,this.type)
+            }
+        },  
+        deletesport:function(index){
+            if(this.type){
+                this.nowAdd.splice(index,1)
+            }else{
+                this.nowfood.splice(index,1)
+            }
+        },
+        addsport:function(){
+            if(this.type){
+                this.nowAdd.push({type:'慢跑',time:""});
+            }else{
+                this.nowfood.push({type:'鸡胸肉沙拉',time:""});
+            }
+            
+        },
+        calcKcal:function(itemf){
+            var nowhot=0;
+            var _arr=[];
+            if(this.type){
+                _arr=this.sportList;
+            }else{
+                _arr=this.foodList
+            }
+            for(var i=0;i<_arr.length;i++){
+                if(itemf.type==_arr[i].type){
+                    nowhot=_arr[i].kcal;
+                }
+            }
+            // return (itemf.time*nowhot).toFixed(1);//保留两位小数
+            return itemf.time*nowhot;
+        }
+    }
+}
+</script>
+<style>
+.calc-main-item h6{
+    font-size:22px;
+    text-align:left;
+    padding:20px;
+}
+.calc-item-data{
+    overflow: hidden;
+    background-image:linear-gradient(120deg,#fda885 0%,#f6d365 100%);
+    color:white;
+    padding:15px 0px;
+}
+.calc-data-num{
+    width:33%;
+    float:left;
+}
+.calc-data-num p:nth-child(1){
+    padding-bottom: 5px;
+}
+.calc-input-content{
+    margin-top:10px;
+}
+</style>
+

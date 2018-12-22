@@ -29,6 +29,9 @@ export default new Router({
     {
       path: '/record',
       name: 'record',
+      meta:{
+          needlogin:true,
+      },
       component: record
     },
     {

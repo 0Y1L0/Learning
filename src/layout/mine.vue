@@ -1,11 +1,7 @@
 <template>
     <div>
         <headernav><span class="header-span">个人中心</span></headernav>
-        <div class="calc-content">
-            <input type="text" name="" v-model="username"/>
-            <input type="password" name="" v-model="password"/>
-            <button @click='login'>登录</button>
-        </div>
+        <div>{{userInfo}}</div>
     </div>
 </template>
 <script>
@@ -17,13 +13,20 @@ export default{
         return{
             username:'',
             password:'',
+            userInfo:''
         }
+    },
+    mounted:function(){
+        var _this=this;
+        axios.get('/vue-learn/ajasix.php?userId'+this.mytool.getCookie('id')).then(res=>{
+            _this.userInfo=res.data.userName;
+            console.log(res.data)
+        })
     },
     methods:{
         login:function(){
-            axios.post('/vue-learn/ajaxfive.php','username='+this.username+'&password='+this.password).then(function(res){
-                // console.log(res)
-            })
+            
+            
         }
     },
     components:{

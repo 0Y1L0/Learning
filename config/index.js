@@ -12,11 +12,11 @@ module.exports = {
     assetsPublicPath: '/',
     //解决开发模式下的跨域问题
     proxyTable: {
-        '/api':{
+        '/api.thb':{
             target:'http://localhost',//后端接口地址
             changeOrigin:true,//是否允许跨域
             pathRewrite:{
-                '^api':'/api',//重写
+                '^api.thb':'/api.thb',//重写
             }
         }
     },

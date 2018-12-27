@@ -52,7 +52,7 @@ export default{
     },
     created:function(){
         var _this=this;
-        axios.get('/vue-learn/ajaxthree.php').then(function(res){
+        axios.get('/vue-learn/ajaxthree.php').then(res=>{
             _this.articleList=res.data.item;
             // console.log(res)
         }).catch(function(err){

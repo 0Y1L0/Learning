@@ -47,18 +47,18 @@ router.beforeEach((to,from,next)=>{
 
 axios.interceptors.request.use(config=> {
    var token=getCookie('token');
-   config.withCredentials = true // 允许携带token ,这个是解决跨域产生的相关问题
+   //config.withCredentials = true // 允许携带token ,这个是解决跨域产生的相关问题
    if(token||token=='undefined'){
         }
     else{
         config.headers.token=token;
-        config.headers.sign='asdasdasdasdasdxcasdasdqweqwsxdasdsad';
+        // config.headers.sign='asdasdasdasdasdxcasdasdqweqwsxdasdsad';
     }
    return config;
   },function(error){
     return Promise.reject(error);
 })
-axios.defaults.baseURL='http:/localhost';
+
 
 
 new Vue({

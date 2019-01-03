@@ -20,7 +20,7 @@ export default{
         var _this=this;
         axios.get('/vue-learn/ajasix.php?userId'+this.mytool.getCookie('id')).then(res=>{
             _this.userInfo=res.data.userName;
-            console.log(res.data)
+            // console.log(res.data)
         })
     },
     methods:{

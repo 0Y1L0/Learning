@@ -5,15 +5,19 @@
       </keep-alive>
     
     <footernav></footernav>
+    <pop :word='$store.state.publicWord' v-if="$store.state.popshow"></pop>
   </div>
 </template>
 
 <script>
 import footernav from "@/components/footernav"
+import pop from "@/components/pop"
+
 export default {
   name: 'App',
   components:{
-    footernav
+    footernav,
+    pop
   }
 }
 </script>

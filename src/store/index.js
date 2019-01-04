@@ -6,6 +6,18 @@ export default new Vuex.Store({
         allKcal:0,
         allTime:0,
         allFoodKcal:0,
-        allFood:0
+        allFood:0,
+        publicWord:'操作成功',
+        popshow:false,
+    },
+    mutations:{
+        changeKcal:function(kcal){
+            state.allKcall=kcal;
+        }
+    },
+    action:{
+        changeKcal:function(kcal){
+            this.commit('changeKcal',kcal)
+        }
     }
 })

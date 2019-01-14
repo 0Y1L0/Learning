@@ -10,32 +10,38 @@
             <div class="calc-item-data">
                 <div class="calc-data-num">
                     <p>{{type?'运动总时长':'摄入量总量'}}</p>
-                    <p>{{type?allTime:allFood}}</p>
+                    <p>{{type?allTime+'分钟':allFood+'kCal'}}</p>
                 </div>
                 <div class="calc-data-num">
                     <p>{{type?'运动消耗热量':'摄入增加热量'}}</p>
-                    <p>{{type?allKcal:allFoodKacl}}</p>
+                    <p>{{type?allKcal:allFoodKacl}}kCal</p>
                 </div>
                 <div class="calc-data-num">
                     <p>{{type?'整体消耗热量':'整体摄入热量'}}</p>
-                    <p>{{allKcal+1700}}</p>
+                    <p>{{allKcal+1700}}kCal</p>
                 </div>
             </div>
             <div class="calc-input-content" v-for="(itemf,index) in nowAdd" v-if='type'>
-                <select v-model='itemf.type'>
-                   <option v-for='item in sportList' :value="item.type">{{item.type}}</option>
-                </select>
-                <input type="" name="" v-model='itemf.time' placeholder="0"/>
-                <button @click='deletesport(index)'>删除</button>
-                <p>消耗了：{{calcKcal(itemf)}}</p>
+                <div class="select-content">
+                    <select v-model='itemf.type'>
+                    <option v-for='item in sportList' :value="item.type">{{item.type}}</option>
+                    </select>
+                    <input class="my-selected" v-model='itemf.time' placeholder="0"/>
+                    <button class="choose-delete" @click='deletesport(index)'>删除</button>
+                </div>
+                
+                <p class="">消耗了：{{calcKcal(itemf)}}kCal</p>
             </div>
             <div class="calc-input-content" v-for="(itemf,index) in nowfood" v-if='!type'>
-                <select v-model='itemf.type'>
-                   <option v-for='item in foodList' :value="item.type">{{item.type}}</option>
-                </select>
-                <input type="" name="" v-model='itemf.time' placeholder="0"/>
-                <button @click='deletesport(index)'>删除</button>
-                <p>消耗了：{{calcKcal(itemf)}}</p>
+                <div class="select-content">
+                    <select v-model='itemf.type'>
+                    <option v-for='item in foodList' :value="item.type">{{item.type}}</option>
+                    </select>
+                    <input class="my-selected" type="" name="" v-model='itemf.time' placeholder="0"/>
+                    <button class="choose-delete" @click='deletesport(index)'>删除</button>
+                </div>
+                
+                <p>消耗了：{{calcKcal(itemf)}}kCal</p>
             </div>
             <div class="calc-input-adder" @click='addsport'>添加运动项目</div>
         </div>
@@ -175,6 +181,30 @@ export default{
 }
 .calc-input-content{
     margin-top:10px;
+}
+.select-content{
+    height: 28px;
+    display:flex;
+    justify-content:space-around
+}
+select{
+    border:1px solid #ccc;
+    height:25px;
+    width:40%;
+}
+.my-selected{
+    width:30%;
+    height:23px;
+    padding:0;
+    border:1px solid #ccc;
+    border-radius:5px;
+
+}
+.choose-delete{
+    width:20%;
+    background-color:#777;
+    border-radius: 5px;
+    color:#fff;
 }
 </style>
 

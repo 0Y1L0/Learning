@@ -34,7 +34,7 @@ export default {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: #565353;
+  background-color: #777;
 }
 .foot-item{
   float: left;

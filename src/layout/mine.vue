@@ -1,5 +1,6 @@
 <template>
    <div class="minecontent">
+       <headernav><span class="header-span">个人中心</span></headernav>
        <div class="userinformation bgcolor">
          <div class="user-namecontent">
             <div class="user-img-content">
@@ -74,8 +75,12 @@
 
 <script type="text/javascript">
   import axios from 'axios'
+  import headernav from '../components/headernav'
 	export default {
-		name:"mine",
+    name:"mine",
+    components:{
+      headernav
+    },
 		data:function(){
 			return {
        targetshow:false,
@@ -83,7 +88,7 @@
        userdata:{}
 			}
 		},
-     mounted:function(){
+    mounted:function(){
       this.getajax();
      },
     activated:function(){
@@ -175,7 +180,9 @@ text-align: center;
        padding-top: 8px;
        font-size: 12px;
 }
- 
+.user-sport-tile{
+  width:80px;
+}
 .user-sport-record .user-sport-num{
   font-size: 20px;
   padding-right: 10px;

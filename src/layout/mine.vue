@@ -177,8 +177,8 @@ text-align: center;
   height: 10px;
 }
 .user-grary{
-       padding-top: 8px;
-       font-size: 12px;
+    padding-top: 8px;
+    font-size: 12px;
 }
 .user-sport-tile{
   width:80px;

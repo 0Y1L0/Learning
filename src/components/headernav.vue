@@ -21,7 +21,7 @@ export default {
 <style scoped>
 .headernav-content{
     /* height: ; */
-    background-color: #565353;
+    background-color: #777;
     position: fixed;
     top: 0;
     width: 100%;

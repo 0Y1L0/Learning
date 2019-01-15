@@ -17,9 +17,9 @@ export default {
   data () {
     return {
       itemarr:[
-        {url:"/",name:"热力计算",imgurl:"icon-icon-test"},
+        {url:"/",name:"热力计算",imgurl:"icon-icon-test1"},
         {url:"/news",name:"健身技巧",imgurl:"icon-jianshen"},
-        {url:"/record",name:"日常打卡",imgurl:"icon-icon-test1"},
+        {url:"/record",name:"日常打卡",imgurl:"icon-icon-test"},
         {url:"/mine",name:"个人中心",imgurl:"icon-user"}
       ]
     }

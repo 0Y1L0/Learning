@@ -6,7 +6,12 @@
 <template>   
     <div class="calc-main">
         <div class=calc-main-item>
-            <h6>{{type?'运动量计算':'摄入量计算'}}</h6>
+            <div class="calc-title">
+                <!-- <span class="iconfont icon-paobu"></span> -->
+                <span :class="[type?'icon-paobu':'icon-miantiao','iconfont']"></span>
+                <h6>{{type?'运动量计算':'摄入量计算'}}</h6>
+            </div>
+            
             <div class="calc-item-data">
                 <div class="calc-data-num">
                     <p>{{type?'运动总时长':'摄入量总量'}}</p>
@@ -30,7 +35,7 @@
                     <button class="choose-delete" @click='deletesport(index)'>删除</button>
                 </div>
                 
-                <p class="">消耗了：{{calcKcal(itemf)}}kCal</p>
+                <p class="fire-content"><span class="fire iconfont icon-huoyanjiare"></span>  &nbsp{{calcKcal(itemf)}}kCal</p>
             </div>
             <div class="calc-input-content" v-for="(itemf,index) in nowfood" v-if='!type'>
                 <div class="select-content">
@@ -40,8 +45,7 @@
                     <input class="my-selected" type="" name="" v-model='itemf.time' placeholder="0"/>
                     <button class="choose-delete" @click='deletesport(index)'>删除</button>
                 </div>
-                
-                <p>消耗了：{{calcKcal(itemf)}}kCal</p>
+                <p class="fire-content"><span class="fire iconfont icon-huoyanjiare"></span>  &nbsp{{calcKcal(itemf)}}kCal</p>
             </div>
             <div class="calc-input-adder" @click='addsport'>添加运动项目</div>
         </div>
@@ -49,6 +53,7 @@
     </div>
 </template>
 <script>
+import headernav from '../components/headernav'
 export default{
     name:'calcer',
     props:['type'],
@@ -161,10 +166,45 @@ export default{
 }
 </script>
 <style>
+.fire-content{
+    margin:10px 0;
+}
+.calc-input-adder{
+   width:40%;
+   background-color:#777;
+   border-radius:15px;
+   color:#fff;
+   line-height: 24px;
+   transform:translateX(80%);
+   font-size:15px;
+}
+.calc-title{
+    display:flex;
+}
+.calc-title .icon-paobu{
+    font-size:50px;
+    text-align: center;
+    color:#ccc
+}
+.calc-title .icon-miantiao{
+    box-sizing: border-box;
+    font-size:30px;
+    text-align: center;
+    color:#ccc;
+    display:block;
+    padding-top:5px;
+    height:50px;
+    width:50px;
+}
+.fire.iconfont{
+    color:red;
+}
 .calc-main-item h6{
     font-size:22px;
     text-align:left;
-    padding:20px;
+    padding:15px;
+    margin-left:-15px;
+    font-weight: normal;
 }
 .calc-item-data{
     overflow: hidden;
@@ -198,7 +238,6 @@ select{
     padding:0;
     border:1px solid #ccc;
     border-radius:5px;
-
 }
 .choose-delete{
     width:20%;

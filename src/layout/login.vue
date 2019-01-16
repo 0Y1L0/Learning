@@ -1,56 +1,78 @@
 <template>
-    <div>
-        <headernav><span class="header-span">登录</span></headernav>
-        <div class="calc-content">
-            <input type="text" name="" v-model="username"/>
-            <input type="password" name="" v-model="password"/>
-            <button @click='login'>登录</button>
-            <pop v-if='popshow' :word='mess' @hidden='fhidden'></pop>
+   <div class="login-content">
+        <headernav>登陆</headernav>
+        <div class="logonwrap"><img src="../../static/img/lflog.png"></div>
+        <div class="primary-input-content inputforuser">
+           <label>用户名：</label>
+           <input type="text" v-model="username" name="username" />
         </div>
-    </div> 
+        <div class="primary-input-content inputforuser">
+           <label>密码：</label>
+           <input type="password" v-model="password" name="password" />
+        </div>
+        <div class="loginbutton-group">
+           <button @click="login" class="loginin login-in-use">登录</button>
+           <router-link to="/reg">
+           <button class="loginin login-un-use">注册</button>   
+           </router-link>
+        </div>
+ </div>
 </template>
-<script>
-import axios from 'axios'
+
+<script type="text/javascript">
 import headernav from '../components/headernav'
-import cry from 'crypto-js'
-import pop from '../components/pop'
-export default{
-    name:'login',
-    data:function(){
-        return{
-            username:'',
-            password:'',
-            popshow:false,
-            mess: ''     
-        }
+import axios from "axios"
+export default {
+	name:"login",
+	data:function(){
+		return {
+            username:"",
+            password:"",
+            remeber:false
+		}
     },
     components:{
-        headernav,
-        pop
+      headernav,
     },
-    methods:{
+    mounted:function(){
+    },
+  	methods:{
         login:function(){
             var that=this;
-            axios.post('/vue-learn/ajaxfive.php','username='+this.username+'&password='+cry.MD5(this.password).toString()).then(res=>{
-                if(res.data.message=="success"){
-                    that.setCookie("id",res.data.userId,1);
-                    that.setCookie("token",res.data.token,1)
-                    that.$router.push('/')
-                }else{    
-                  that.popshow=true;
-                  that.mess=res.data.message;   
-                }     
-            })
-        },
-        fhidden:function(){
-            this.popshow=false;
-        },
-        setCookie:function (cname,cvalue,exdays){
-            var d = new Date();
-            d.setTime(d.getTime()+(exdays*24*60*60*1000));
-            var expires = "expires="+d.toGMTString();
-            document.cookie = cname+"="+cvalue+"; "+expires;
+            var _string='username=';
+            _string+=this.username;
+            _string+='&password=';
+            _string+=this.password;
+            console.log(_string);        
+            axios.post("./api/lf/login.php?act=login",_string).then(function(re){
+               if(typeof re.data==="string"){
+                 alert(re.data);
+               }
+               else{
+                 that.$router.push('/');
+                 that.hub.$emit("loginfooter");
+                 that.hub.$emit("getuser",re.data);
+               }
+            });
         }
-    }
+  	}
 }
 </script>
+
+<style type="text/css">
+.login-content{
+ padding-top: 100px;
+ /* height:100%; */
+ box-sizing: border-box;
+ background:url("../../static/img/loginbg.jpg") no-repeat;
+ background-size:cover;
+ margin-top:-6px;
+}
+.logonwrap{
+ text-align: center;
+ width: 100%;
+}
+.logonwrap img{
+ width: 30%;
+}
+</style>

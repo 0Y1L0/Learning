@@ -197,7 +197,7 @@ text-align: center;
   padding-top: 10px;
   font-size: 14px;
   padding-bottom: 10px;
-  
+  font-size:16px;
 }
 .userinformation{
 background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);

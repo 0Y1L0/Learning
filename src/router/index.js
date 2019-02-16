@@ -6,6 +6,8 @@ import news from '@/layout/news'
 import record from '@/layout/record'
 import articledetail from '@/layout/articledetail'
 import login from '@/layout/login'
+import history from '@/layout/history'
+import reverse from '@/layout/reverse'
 
 Vue.use(Router)
 
@@ -19,20 +21,16 @@ export default new Router({
     {
       path: '/mine',
       name: 'mine',
-      component: mine
+      component: mine,
+      children:[
+       
+        
+      ]
     },
     {
       path: '/news',
       name: 'news',
       component: news
-    },
-    {
-      path: '/record',
-      name: 'record',
-      meta:{
-          needlogin:true,
-      },
-      component: record
     },
     {
        path:'/articledetail',
@@ -43,6 +41,30 @@ export default new Router({
        path:'/login',
        name:'login',
        component:login
+    },
+    {
+      path: '/record',
+      name: 'record',
+      meta:{
+        needlogin:true,
+      },
+      component: record
+    },
+    {
+      path:'/mine/history',
+      name:'history',
+      meta:{
+        needlogin:true,
+      },
+      component:history
+    },
+    {
+      path:'/mine/reverse',
+      name:'reverse',
+      // meta:{
+      //   needlogin:true,
+      // },
+      component:reverse
     }
   ]
 })

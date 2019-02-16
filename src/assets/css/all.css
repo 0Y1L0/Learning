@@ -41,28 +41,35 @@ body{
 	color: #777;
 }
 .primary-input-content{
-	padding: 10px 15px;
+	display:flex;
+	justify-content:space-between;
+	padding: 15px 35px;
+	text-align:left;
 	border-bottom: 1px solid #e1e1e1;
+	height:30px;
+	line-height: 30px;
+	/* columns:30px 2;
+	column-gap:10px; 要将布局元素变成块级元素 */
 }
 .primary-input-content input{
+	flex:1;
 	height: 20px;
-	line-height: 20px;
 	padding-left: 8px;
 	border:1px solid #666;
 	border-radius: 5px;
-	width: 40%;
+	/* display:block; */
 }
 .primary-input-content label{
-	display: inline-block;
-	width: 25%;
+	flex:1;
+	/* width: 25%; */
+	/* display:block; */
 }
 .primary-input-content select{
-	width: 20%;
-	height: 20px;
-border:1px solid #666;
+	flex:1;
+	height: 24px;
+    border:1px solid #666;
 	border-radius: 5px;
 	padding-left: 8px;
-
 }
 select option{
 	width: 100%;

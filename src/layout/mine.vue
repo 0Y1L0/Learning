@@ -4,14 +4,14 @@
        <div class="userinformation bgcolor">
          <div class="user-namecontent">
             <div class="user-img-content">
-       	 <img src="../../static/img/kk.jpeg" />
+       	      <img src="../../static/img/kk.jpeg" />
             </div>
             <div class="user-name-content">
               <div class="user-name">
-               {{userdata.name}}
+                {{userdata.name}}
               </div>
               <div class="user-grary">
-                <!-- <span class="iconfont">&#xe60e</span><span>{{userdata.honner+'个'}}</span> -->
+                <span class="fire iconfont icon-dengji"></span> <span>{{userdata.honner+'个'}}</span>
               </div>
             </div>
           </div>
@@ -63,10 +63,10 @@
             </div>
           </div>
           <router-link to="/mine/history">
-          <div class="handle-li">历史记录</div>
+            <div class="handle-li">历史记录</div>
           </router-link >
           <router-link to="/mine/reverse">          
-          <div class="handle-li">修改资料</div>
+            <div class="handle-li">修改资料</div>
           </router-link >
           <div class="handle-li" @click="loginout">退出登录</div>
        </div>

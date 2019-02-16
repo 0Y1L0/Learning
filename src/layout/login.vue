@@ -3,12 +3,12 @@
         <headernav>登陆</headernav>
         <div class="logonwrap"><img src="../../static/img/lflog.png"></div>
         <div class="primary-input-content inputforuser">
-           <label>用户名：</label>
-           <input type="text" v-model="username" name="username" />
+           <label for='username'>用户名：</label>
+           <input type="text" v-model="username" name="username" id='username'/>
         </div>
         <div class="primary-input-content inputforuser">
-           <label>密码：</label>
-           <input type="password" v-model="password" name="password" />
+           <label for='password'>密码：</label>
+           <input type="password" v-model="password" name="password" id='password'/>
         </div>
         <div class="loginbutton-group">
            <button @click="login" class="loginin login-in-use">登录</button>
@@ -62,7 +62,7 @@ export default {
 <style type="text/css">
 .login-content{
  padding-top: 100px;
- /* height:100%; */
+ height:100%;
  box-sizing: border-box;
  background:url("../../static/img/loginbg.jpg") no-repeat;
  background-size:cover;

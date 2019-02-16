@@ -1,14 +1,14 @@
 <template>
-   <div class="foot-content">
-     <div v-for="item in itemarr">
-       <router-link :to=item.url>
+  <div class="foot-content">
+    <div v-for="item in itemarr">
+      <router-link :to=item.url>
         <div class="foot-item">
-            <div><span :class="['iconfont',item.imgurl]"></span></div>
-            <div>{{item.name}}</div>
+          <div><span :class="['iconfont',item.imgurl]"></span></div>
+          <div>{{item.name}}</div>
         </div>
-       </router-link>
-     </div>
-   </div>
+      </router-link>
+    </div>
+  </div>
 </template>
 
 <script>

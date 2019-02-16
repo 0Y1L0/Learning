@@ -12,7 +12,7 @@ import mytool from "./assets/js/common.js"
 Vue.config.productionTip = false
 
 Vue.prototype.mytool=mytool;
-axios.defaults.baseURL="http://site1.io"
+axios.defaults.baseURL="http://site.io"
 /* eslint-disable no-new */
 
 function getCookie(name){

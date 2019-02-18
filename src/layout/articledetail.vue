@@ -1,6 +1,6 @@
 <template>
     <div>
-        <headernav><span class="header-span">文章详情</span></headernav>
+        <!-- <headernav><span class="header-span">文章详情</span></headernav> -->
          <div>{{articlecontent}}</div>
     </div>
 </template>

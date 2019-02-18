@@ -1,7 +1,7 @@
 <template>
     <div class="headernav-content">
         <span class="header-left-span iconfont icon-huitui" @click='goback'></span>
-        <slot></slot>
+        <div class='title'><slot></slot></div>
         <span class="header-right-span iconfont icon-xiaoxi"></span>
     </div>
 </template>
@@ -20,7 +20,8 @@ export default {
 </script>
 <style scoped>
 .headernav-content{
-    /* height: ; */
+    box-sizing: border-box;
+    height:52px ;
     background-color: #777;
     position: fixed;
     top: 0;
@@ -40,5 +41,9 @@ export default {
 }
 .header-right-span{
     right: 10px;
+}
+.title{
+    display:inline-block;
+    font-size:20px;
 }
 </style>

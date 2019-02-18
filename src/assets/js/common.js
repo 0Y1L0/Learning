@@ -6,5 +6,8 @@ export default{
         }
         else
         return null;
-    }
+    },
+    changeTitle:function(){
+        
+    },
 }

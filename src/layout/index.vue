@@ -1,10 +1,10 @@
 <template>
     <div class="calc-content">
-        <headernav><span class="header-span">热量计算</span></headernav>
+        <!-- <headernav><span class="header-span">热量计算</span></headernav> -->
         <calcer :type='true' @fhandle="fatherhandle"></calcer>
         <calcer :type='false' @fhandle="fatherhandle"></calcer>
         <div>
-            <p>总共消耗了：{{$store.state.allKcal}}</p>
+            <p>总共消耗了：{{$store.state.allKcal}}</p><!-- vuex -->
             <p>总共增加了：{{$store.state.allFoodKcal}}</p>
             <p>总共脂肪{{$store.state.allKcal-$store.state.allFoodKcal>0?'消耗':'增加'}}：{{Math.abs($store.state.allKcal-$store.state.allFoodKcal)}}</p>
         </div>

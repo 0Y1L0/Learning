@@ -1,6 +1,6 @@
 <template>
    <div class="login-content">
-        <headernav>登陆</headernav>
+        <!-- <headernav>登陆</headernav> -->
         <div class="logonwrap"><img src="../../static/img/lflog.png"></div>
         <div class="primary-input-content inputforuser">
            <label for='username'>用户名：</label>
@@ -74,5 +74,8 @@ export default {
 }
 .logonwrap img{
  width: 30%;
+}
+body{
+   height:90%;
 }
 </style>

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
 export default new Vuex.Store({
-    state:{
+    state:{//要设置的全局访问的state对象
         allKcal:0,
         allTime:0,
         allFoodKcal:0,
@@ -10,12 +10,15 @@ export default new Vuex.Store({
         publicWord:'操作成功',
         popshow:false,
     },
-    mutations:{
+    getter:{//承载变化的值，实时监听state值的变化
+
+    },
+    mutations:{//自定义改变state初始值的方法
         changeKcal:function(kcal){
             state.allKcall=kcal;
         }
     },
-    action:{
+    action:{//自定义触发mutations里面的函数方法
         changeKcal:function(kcal){
             this.commit('changeKcal',kcal)
         }

@@ -1,6 +1,6 @@
 <template>
    <div class="minecontent">
-       <headernav><span class="header-span">个人中心</span></headernav>
+       <!-- <headernav><span class="header-span">个人中心</span></headernav> -->
        <div class="userinformation bgcolor">
          <div class="user-namecontent">
             <div class="user-img-content">
@@ -194,10 +194,11 @@ text-align: center;
 }
 .handle-li{
   padding-left: 15px;
-  padding-top: 10px;
-  font-size: 14px;
-  padding-bottom: 10px;
-  font-size:16px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-size:17px;
+  border-bottom: 1px solid #e1e1e1;
+  height: 10%;
 }
 .userinformation{
 background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
@@ -232,9 +233,6 @@ background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
   font-size: 12px;
   padding-bottom: 4px;
   color:white;
-}
-.handle-li{
-  border-bottom: 1px solid #e1e1e1;
 }
 .card-add-input{
   text-align: center;

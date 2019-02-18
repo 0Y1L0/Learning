@@ -42,6 +42,7 @@ export default {
 <style>
  .history-content{
   text-align: center;
+  margin-top: 70px;
  }
  .history-item{
   background-color: white;

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <headernav><span class="header-span">健身技巧</span></headernav>
+        <!-- <headernav><span class="header-span">健身技巧</span></headernav> -->
         <div class="calc-content">
             <div v-for="item in userTarget.Items">
                 <p>{{item.name}}</p>

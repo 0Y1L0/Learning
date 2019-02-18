@@ -1,18 +1,21 @@
 <template>
-    <div>
-        <headernav><span class="header-span">健身技巧</span></headernav>
-        <swiper :options="swiperOption">
-            <swiper-slide v-for="slide in bannerlist">
-                <img class="banner-img" :src="slide.imgurl"/>
-                <div class="slide-title">{{slide.mes}}</div>
-            </swiper-slide>
-        </swiper>
-        {{articleList}}
-        <div v-for='item in articleList'><!--@click='tosee(item.id)-->
-            <router-link :to="'/articledetail?id='+item.id">
-              <h4>{{item.title}}</h4>
-              <p>{{item.content}}</p>
-            </router-link>
+    <div class="news-container">
+        <!-- <headernav><span class="header-span">健身技巧</span></headernav> -->
+        <div class='slide-container'>
+            <swiper :options="swiperOption">
+                <swiper-slide v-for="slide in bannerlist">
+                    <img class="banner-img" :src="slide.imgurl"/>
+                    <div class="slide-title">{{slide.mes}}</div>
+                </swiper-slide>
+            </swiper>
+        </div>      
+        <div class="topic-container">
+            <head>话题讨论</head>
+            <div class="topic-component">
+                <router-link to="" v-for="topic in topiclist">
+                    <div class="topic-page"><img :src="topic.imgurl"/></div>
+                </router-link>
+            </div>
         </div>
     </div>
 </template>
@@ -34,6 +37,11 @@ export default{
                 {imgurl:"../../static/img/b6.jpg",title:"this is title6"},
                 {imgurl:"../../static/img/b7.jpg",title:"this is title7"},
             ],
+            topiclist:[
+                {imgurl:"../../static/img/a1.JPG"},
+                {imgurl:"../../static/img/a2.JPG"},
+                {imgurl:"../../static/img/a3.JPG"}, 
+            ],
             swiperOption:{
                 loop:true,
                 autoplay : {
@@ -42,7 +50,7 @@ export default{
                 },
                 speed:1000,
             },
-            articleList:[]
+            articleList:[],//get请求获取
         }
     },
     methods:{
@@ -50,6 +58,7 @@ export default{
         //     this.$router.push('/articledetail?id='+id)
         // }
     },
+    
     created:function(){
         var _this=this;
         axios.get('/vue-learn/ajaxthree.php').then(res=>{
@@ -67,6 +76,26 @@ export default{
 }
 </script>
 <style scoped>
+.news-container{ 
+}
+.topic-container{
+    padding:20px 10px;
+    text-align: left;
+}
+.topic-page{
+    margin-bottom:5px;
+}
+.topic-page img{
+    width: 100%;
+}
+head{
+    display:block;
+    margin-bottom: 20px;
+}
+.slide-container{
+    height:223px;
+    background-color: #cccc;
+}
 .swiper-slide{
     height: 0;
     overflow: hidden;

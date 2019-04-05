@@ -20,6 +20,7 @@ export default {
 </script>
 <style scoped>
 .headernav-content{
+    z-index: 999;
     box-sizing: border-box;
     height:52px ;
     background-color: #777;

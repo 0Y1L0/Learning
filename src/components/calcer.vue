@@ -23,33 +23,32 @@
                 </div>
                 <div class="calc-data-num">
                     <p>{{type?'整体消耗热量':'整体摄入热量'}}</p>
-                    <p>{{allKcal+1700}}kCal</p>
+                    <p>{{type?allKcal:allFoodKacl}}kCal</p>
                 </div>
             </div>
-            <div class="calc-input-content" v-for="(itemf,index) in nowAdd" v-if='type'>
+            <div class="calc-input-content" v-for="(itemf,index) in $store.state.nowAdd" v-if='type'>
                 <div class="select-content">
                     <select v-model='itemf.type'>
                     <option v-for='item in sportList' :value="item.type">{{item.type}}</option>
                     </select>
-                    <input class="my-selected" v-model='itemf.time' placeholder="0"/>
+                    <input class="my-selected" v-model='itemf.time' placeholder="0" @input="calcKcal(itemf)"/>
                     <button class="choose-delete" @click='deletesport(index)'>删除</button>
                 </div>
-                
-                <p class="fire-content"><span class="fire iconfont icon-huoyanjiare"></span>  &nbsp{{calcKcal(itemf)}}kCal</p>
+                <p class="fire-content"><span class="fire iconfont icon-huoyanjiare"></span>  &nbsp{{oneAction}}kCal</p>
             </div>
-            <div class="calc-input-content" v-for="(itemf,index) in nowfood" v-if='!type'>
+            <div class="calc-input-content" v-for="(itemf,index) in $store.state.nowfood" v-if='!type'>
                 <div class="select-content">
                     <select v-model='itemf.type'>
                     <option v-for='item in foodList' :value="item.type">{{item.type}}</option>
                     </select>
-                    <input class="my-selected" type="" name="" v-model='itemf.time' placeholder="0"/>
+                    <input class="my-selected" type="" name="" v-model='itemf.time' placeholder="0" @input="calcKcal(itemf)"/>
                     <button class="choose-delete" @click='deletesport(index)'>删除</button>
                 </div>
-                <p class="fire-content"><span class="fire iconfont icon-huoyanjiare"></span>  &nbsp{{calcKcal(itemf)}}kCal</p>
+                <p class="fire-content"><span class="fire iconfont icon-huoyanjiare"></span>  &nbsp{{oneAction}}kCal</p>
             </div>
             <div class="calc-input-adder" @click='addsport'>添加运动项目</div>
         </div>
-        <button @click='handle'>计算</button>
+        <!-- <button @click='handle'>计算</button> -->
     </div>
 </template>
 <script>
@@ -83,40 +82,41 @@ export default{
                 {type:"烤龙利鱼",kcal:523},
                 {type:"麻辣鸡丝",kcal:729},
             ],         
-            nowAdd:[{type:'慢跑',time:""}],
-            nowfood:[{type:'鸡胸肉沙拉',time:""}],
+            oneAction:0
         }
     },
     watch:{},
     computed:{
-        allKcal:function(){
+        allKcal:function(){//运动减少的kcl
             var _allKcal=0;
-            for(var i=0;i<this.nowAdd.length;i++){
-                _allKcal+=this.calcKcal(this.nowAdd[i]);
+            for(var i=0;i<this.$store.state.nowAdd.length;i++){
+                _allKcal+=this.calcKcal(this.$store.state.nowAdd[i]);
             }
+            _allKcal=_allKcal.toFixed(1)
             this.$store.state.allKcal=_allKcal;
             return _allKcal;
         },
-        allTime:function(){
+        allTime:function(){//运动总时长
             var _alltime=0;
-            for(var i=0;i<this.nowAdd.length;i++){
-                _alltime+=this.nowAdd[i].time-0;
+            for(var i=0;i<this.$store.state.nowAdd.length;i++){
+                _alltime+=this.$store.state.nowAdd[i].time-0;
             }
             this.$store.state.allTime=_alltime;
             return _alltime;
         },
-        allFoodKacl:function(){
+        allFoodKacl:function(){//摄入食物增加的kcl
             var _allFoodKacl=0;
-            for(var i=0;i<this.nowfood.length;i++){
-                _allFoodKacl+=this.calcKcal(this.nowfood[i]);
+            for(var i=0;i<this.$store.state.nowfood.length;i++){
+                _allFoodKacl+=this.calcKcal(this.$store.state.nowfood[i]);
             }
+            _allFoodKacl=_allFoodKacl.toFixed(1)
             this.$store.state.allFoodKcal=_allFoodKacl;
             return _allFoodKacl;
         },
-        allFood:function(){
+        allFood:function(){//摄入食物分量
             var _allfood=0;
-            for(var i=0;i<this.nowfood.length;i++){
-                _allfood+=this.nowfood[i].time-0;
+            for(var i=0;i<this.$store.state.nowfood.length;i++){
+                _allfood+=this.$store.state.nowfood[i].time-0;
             }
             this.$store.state.allFood=_allfood;
 
@@ -124,29 +124,29 @@ export default{
         }
     },
     methods:{
-        handle:function(){
-            if(this.type){
-                this.$emit('fhandle',this.allTime,this.allKcal,this.type)
-            }else{
-                this.$emit('fhandle',this.allFood,this.allFoodKacl,this.type)
-            }
-        },  
+        // handle:function(){//将总消耗和总输出传递给父组件
+        //     if(this.type){
+        //         this.$emit('fhandle',this.allTime,this.allKcal,this.type)
+        //     }else{
+        //         this.$emit('fhandle',this.allFood,this.allFoodKacl,this.type)
+        //     }
+        //},  
         deletesport:function(index){
             if(this.type){
-                this.nowAdd.splice(index,1)
+                this.$store.state.nowAdd.splice(index,1)
             }else{
-                this.nowfood.splice(index,1)
+                this.$store.state.nowfood.splice(index,1)
             }
         },
         addsport:function(){
             if(this.type){
-                this.nowAdd.push({type:'慢跑',time:""});
+                this.$store.state.nowAdd.push({type:'慢跑',time:""});
             }else{
-                this.nowfood.push({type:'鸡胸肉沙拉',time:""});
+                this.$store.state.nowfood.push({type:'鸡胸肉沙拉',time:""});
             }
             
         },
-        calcKcal:function(itemf){
+        calcKcal:function(itemf){//计算单项运动/食物的卡路里
             var nowhot=0;
             var _arr=[];
             if(this.type){
@@ -160,7 +160,9 @@ export default{
                 }
             }
             // return (itemf.time*nowhot).toFixed(1);//保留两位小数
-            return itemf.time*nowhot;
+            var _calcKcal=itemf.time*nowhot;
+            this.oneAction=_calcKcal.toFixed(1)
+            return _calcKcal;
         }
     }
 }
